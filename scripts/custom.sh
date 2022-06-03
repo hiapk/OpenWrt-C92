@@ -8,6 +8,9 @@
 # Modify default IP
 sed -i 's/192.168.1.1/192.168.0.10/g' package/base-files/files/bin/config_generate
 
+# Modify default password
+sed -i 's/root:::0:99999:7:::/root:$1$gkKWROTH$5wKjQEHBVJjx4WQyBmJFk0:19135:0:99999:7:::/g' package/base-files/files/etc/shadow
+
 # Add date version
 export DATE_VERSION=$(date -d "$(rdate -n -4 -p pool.ntp.org)" +'%Y-%m-%d')
 sed -i "s/%C/%C (${DATE_VERSION})/g" package/base-files/files/etc/openwrt_release
